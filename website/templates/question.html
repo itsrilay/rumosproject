@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+    <h3>{{question.title}}</h3>
+    <h5>De: <b>{{question.user}}</b></h5>
+</div>
+
+{% if question.image.url != null %}
+<div>
+    <img class="img-thumbnail" src="{{question.image.url}}" alt="" width="800" height="600">
+</div>
+{% endif %}
+
+
+<div class="card text-bg-success rounded-0">
+    <div class="card-body">
+      <p class="card-text">{{question.body}}</p>
+    </div>
+    <div class="card-footer text-body-emphasis">
+      <b>{{question.user}}</b>
+    </div>
+</div>
+
+
+<hr>
+
+    
+
+{% for answer in answers %}
+<div class="card border-1 border-success-subtle rounded-0">
+    <div class="card-body">
+      <br>
+      <p class="card-text">{{answer.body}}</p>
+    </div>
+    <div class="card-footer text-body-emphasis">
+      <b>{{answer.user}}</b>
+    </div>
+</div>
+
+{% endfor %}
+<br>
+<br>
+
+<div class="">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Responder</button>
+    </form>
+</div>
+
+
+{% endblock %}

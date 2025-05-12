@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="text-xxl-center">
+  <h1>Fórum de Perguntas</h1>
+</div>
+
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#questionModal">
+   Perguntar
+</button>
+  
+<!-- Modal -->
+<div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="questionModalLabel">Faça uma pergunta</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body container">
+              <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <button type="submit" class="btn btn-success">Enviar</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="container-fluid px-4 px-lg-5 mt-5">
+    <div class="row justify-content-center gx-1 gx-lg-0 row-cols-lg-1 row-cols-md-auto row-cols-xl-1">
+      {% for question in questions %}
+  
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{question.title}}</h5>
+          <p class="card-text">Pergunta feita por <b>{{question.user.username}}</b></p>
+          <p class="card-text"><small class="text-body-secondary">Criada em {{question.created_at}}</small></p>
+        </div>
+        <div>
+          <a href="/question/{{question.id}}"><button class="btn btn-success" type="button">Ver Pergunta</button></a>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>  
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+.gitignore
+*.pyc
+*.pyo
+*.pyd
+/core/__pycache__/
+/website/__pycache__/
+/website/migrations/
+*.sqlite3
+*.db
+/static/uploads/
+.venv
+.vscode

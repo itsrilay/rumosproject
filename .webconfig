@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration>
+    <system.webServer>
+        <staticContent>
+            <mimeMap fileExtension=".css" mimeType="text/css" />
+            <mimeMap fileExtension=".js" mimeType="text/javascript" />
+            <!-- Add more MIME types as needed -->
+        </staticContent>
+    </system.webServer>
+</configuration>
