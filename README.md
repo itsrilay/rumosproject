@@ -1,4 +1,6 @@
-# Django Project
+# Rumos Project
+
+**NOTE**: This project was developed as part of my training at Rumos Software Development Academy in 2023. It is not actively maintained and may have incomplete or non-functional features, but it reflects my learning progress and use of technologies like Django.
 
 ## Functionalities:
 
@@ -54,10 +56,15 @@ There's a few steps you need to follow in order to setup the project to run loca
     git clone https://github.com/itsrilay/rumosproject
     ```
 
-2.  **Create the virtual environment**
+2.  **Go to local repository**
 
-    - Now that you have the project in your local repository, you need to create a virtual environment.  
-      <br>
+    ```sh
+    cd rumosproject
+    ```
+
+3.  **Create the virtual environment**
+
+    - Now that you have the project in your local repository, you need to create a virtual environment.
 
     **Windows**:
 
@@ -73,9 +80,9 @@ There's a few steps you need to follow in order to setup the project to run loca
     python3 -m venv .venv
     ```
 
-3.  **Activate the virtual environment**
+4.  **Activate the virtual environment**
 
-    - Inside Visual Studio Code, create a new terminal my doing `CTRL + J`, and activate the virtual environment.
+    - To activate the virtual environment, run:
       <br>
 
     **Windows**:
@@ -92,7 +99,7 @@ There's a few steps you need to follow in order to setup the project to run loca
     source .venv/bin/activate
     ```
 
-4.  **Install the dependencies**
+5.  **Install the dependencies**
 
     - You'll need to install some packages before you're able to run the project properly. To install the needed packages, you'll need to have pip installed. If you don't have it yet, run:
 
@@ -118,7 +125,7 @@ There's a few steps you need to follow in order to setup the project to run loca
 
     Keep in mind, if you're only running the project locally, some packages won't be useful right away, since they'll be used for production, like gunicorn.
 
-5.  **Set up environment variables**
+6.  **Set up environment variables**
 
     - This is an important step, be sure to set up your environment variables properly. To securely store your variables, you should make a new file, a _.env_ file. It's not mandatory to store them this way, but it's the most secure way, especially if they store sensitive information that shouldn't be shared with anyone, if you're forking my repository and making your own that is.
     - Create the .env file like you would create any other file inside the project directory. Use a .gitignore file to make sure that the .env file isn't pushed to your remote repository, if you're planning to use one.
@@ -143,7 +150,7 @@ There's a few steps you need to follow in order to setup the project to run loca
 
     **NOTE:** If you just want to test the project locally and nothing else, only use the SECRET_KEY and DEBUG variables.
 
-6.  **Change settings.py and urls.py**
+7.  **Change settings.py and urls.py**
 
     **settings.py**:
 
@@ -172,11 +179,11 @@ There's a few steps you need to follow in order to setup the project to run loca
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     ```
 
-7.  **Change the Product, Question and Challenge models**
+8.  **Change the Product, Question and Challenge models**
 
     - In website/models.py, make sure to change the image field for the Product, Question and Challenge models. Remove the **storage** variable along with its value, since that's for using a Azure Storage account, and change the **upload_to** variable to something like this format: `upload_to='static/uploads/x`. Replace _x_ with a different name for each model, like _products_, _questions_, _challenges_.
 
-8.  **Migrate database**
+9.  **Migrate database**
 
     Run the following commands:
 
@@ -188,7 +195,7 @@ There's a few steps you need to follow in order to setup the project to run loca
     python manage.py migrate
     ```
 
-9.  **Seed database**:
+10. **Seed database**:
 
     Seed the database with sample data:
 
@@ -196,7 +203,7 @@ There's a few steps you need to follow in order to setup the project to run loca
     python manage.py seed_db
     ```
 
-10. **Run the project**
+11. **Run the project**
     - Now you're ready to run the project with the `python manage.py runserver` command.
 
 ## How to setup the project to run online?
