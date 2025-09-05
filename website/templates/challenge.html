@@ -1,60 +1,61 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} {% block content %}
+<div class="text-xxl-center">
+  <h1>Desafio Diário</h1>
+</div>
 
-{% block content %}
-    <div class="text-xxl-center">
-        <h1>Desafio Diário</h1>
-    </div>
+<br />
+<br />
+<br />
 
-    <br>
-    <br>
-    <br>
-    
-    {% if selected_challenge == None %}
-    <div class="text-xl-center">
-        <p class="text-success-emphasis">{{ challenge.text }}</p>
-        <img src="{{ challenge.image.url }}" alt="" width="800" height="400">
-    </div>
+{% if selected_challenge == None %}
+<div class="text-xl-center">
+  <p class="text-success-emphasis">{{ challenge.text }}</p>
+  {% if challenge.image %}
+  <img src="{{ challenge.image.url }}" alt="" width="800" height="400" />
+  {% endif %}
+</div>
 
-    <br>
-    <br>
-    <br>
-    
-    
-    <!-- Render the form with an ID for JavaScript -->
-    <form method="post" id="challenge-form" data-correct-answer="{{ challenge.correct_answer }}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Responder</button>
-    </form>
+<br />
+<br />
+<br />
 
-    {% else %}
-    <div class="text-center">
-        <p>Não há nenhum desafio para hoje</p>
-    </div>
-    {% endif %}
+<!-- Render the form with an ID for JavaScript -->
+<form
+  method="post"
+  id="challenge-form"
+  data-correct-answer="{{ challenge.correct_answer }}">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit" class="btn btn-success">Responder</button>
+</form>
 
-    <!-- JavaScript for form validation -->
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('challenge-form');
-            const userAnswerField = form.querySelector('#id_user_answer');
-            const correctAnswer = form.getAttribute('data-correct-answer');
+{% else %}
+<div class="text-center">
+  <p>Não há nenhum desafio para hoje</p>
+</div>
+{% endif %}
 
-            form.addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevent the form from submitting
+<!-- JavaScript for form validation -->
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('challenge-form');
+    const userAnswerField = form.querySelector('#id_user_answer');
+    const correctAnswer = form.getAttribute('data-correct-answer');
 
-                // Get the user's answer
-                const userAnswer = userAnswerField.value.toLowerCase(); // Convert to lowercase
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the form from submitting
 
-                // Compare the user's answer with the correct answer
-                if (userAnswer === correctAnswer.toLowerCase()) {
-                    // Display a success message
-                    alert('Resposta correta!');
-                } else {
-                    // Display an error message
-                    alert('Resposta errada...');
-                }
-            });
-        });
-    </script>
+      // Get the user's answer
+      const userAnswer = userAnswerField.value.toLowerCase(); // Convert to lowercase
+
+      // Compare the user's answer with the correct answer
+      if (userAnswer === correctAnswer.toLowerCase()) {
+        // Display a success message
+        alert('Resposta correta!');
+      } else {
+        // Display an error message
+        alert('Resposta errada...');
+      }
+    });
+  });
+</script>
 {% endblock %}
